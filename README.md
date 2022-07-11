@@ -1,92 +1,91 @@
-# Data Historian Adapter
+# Deep Lynx Data Historian Adapter
 
+Deep Lynx Data Historian Adapter
 
+This software is intended to facilitate the ingestion of data from some data historian into [Deep Lynx](https://github.com/idaholab/Deep-Lynx). This software is intended to facilitate the ingestion of data from some data historian into Deep Lynx. A data historian in this instance is any location where sensor and operational data from some live asset is gathered. The data can be either manual retrieved by this software or the data historian source can push to a listening endpoint provided by this software.
 
-## Getting started
+## Data Historian Overview
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+Two modes form data retrieval:
+1. Manual Retrieval
+    * Data is manually retrieved by reading a file located on an external file system (i.e. server). Note: Current implementation
+2. Listening Endpoint
+    * The data historian source pushes data to a listening endpoint provided by this software (i.e. `/historian`). Note: Architecture exists, but the responsibility is on the user to implement. See the `file_handler()` function in `__init__.py`
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+## Data Historian: Manual Revieval
 
-## Add your files
+Data is manually retrieved by reading a file located on an external file system, such as a server, using a mount point. A mount point is a directory (typically an empty one) in the currently accessible filesystem on which an additional filesystem is mounted (i.e., logically attached). To create this mount point, the `REPOSITORY_MOUNT_DIRECTORY`, `SERVER_DIRECTORY_PATH`, and `SERVER_FILE_PATH` environment variables must be set. See the `Environment Variables` section for more details.
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+There are two ways to ingest data into Deep Lynx:
+1. Upload File
+    * A file is attached to the payload (metadata) provided for insertion into Deep Lynx. The `METADATA_FILES` environment variable must be set (leave `FILE_TRANSFORMATIONS` empty). Note: Current implementation
+2. Transformations
+    * The JSON payload is provided that will imported and ingested to the Deep Lynx graph via the typemappings system. Create a script to build your payload in the `transformations/` directory. The `FILE_TRANSFORMATIONS` environment variable must be set (leave `METADATA_FILES` empty). 
 
-```
-cd existing_repo
-git remote add origin https://gitlab.software.inl.gov/b650/Data-Historian-Adapter.git
-git branch -M main
-git push -uf origin main
-```
+## Environment Variables (.env file)
+To run this code, first copy the `.env_sample` file and rename it to `.env`. Several parameters must be present:
+* DEEP_LYNX_URL: The base URL at which calls to Deep Lynx should be sent
+* CONTAINER_NAME: The container name within Deep Lynx
+* DATA_SOURCE_NAME: A name for this data source to be registered with Deep Lynx
+* REPOSITORY_MOUNT_DIRECTORY: A given location (mount point) where a file system is mounted to
+* SERVER_DIRECTORY_PATH: The location of the external file system
+* SERVER_FILE_PATH: The path to a file located on the external file system to read from
+* COLUMNS_KEEP: Column headers within file to keep
+* METADATA_FILES: Paths to .json file(s) containing the payload (metadata) that a file will be attached to in Deep Lynx 
+* FILE_TRANSFORMATIONS: Paths to .json file(s) containing the payload that will imported and ingested to the Deep Lynx graph via the typemappings system
+* FILE_SECONDS: Number of seconds to wait between attempts to locate a file. 
+* DELETE_FILE_FLAG: Set to True to delete files after they are successfully processed and ingested to Deep Lynx
 
-## Integrate with your tools
+## Getting Started 
+* Complete the [Poetry installation](https://python-poetry.org/) 
+* All following commands are run in the root directory of the project:
+    * Run `poetry install` to install the defined dependencies for the project.
+    * Run `poetry shell` to spawns a shell.
+    * Finally, run the project with the command `flask run`
 
-- [ ] [Set up project integrations](https://gitlab.software.inl.gov/b650/Data-Historian-Adapter/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+Logs will be written to a logfile, stored in the root directory of the project. The log filename is set in `src/__init__.py` and is called `DataHistorianAdapter.log`. 
 
 ## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+This project uses [yapf](https://github.com/google/yapf) for formatting. Please install it and apply formatting before submitting changes (e.g. `yapf --in-place --recursive . --style={column_limit:120}`)
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+## Other Software
+Idaho National Laboratory is a cutting edge research facility which is a constantly producing high quality research and software. Feel free to take a look at our other software and scientific offerings at:
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+[Primary Technology Offerings Page](https://www.inl.gov/inl-initiatives/technology-deployment)
+
+[Supported Open Source Software](https://github.com/idaholab)
+
+[Raw Experiment Open Source Software](https://github.com/IdahoLabResearch)
+
+[Unsupported Open Source Software](https://github.com/IdahoLabCuttingBoard)
 
 ## License
-For open source projects, say how it is licensed.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Copyright 2022 Battelle Energy Alliance, LLC
+
+Licensed under the LICENSE TYPE (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  https://opensource.org/licenses/MIT  
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+
+
+Licensing
+-----
+This software is licensed under the terms you may find in the file named "LICENSE" in this directory.
+
+
+Developers
+-----
+By contributing to this software project, you are agreeing to the following terms and conditions for your contributions:
+
+You agree your contributions are submitted under the MIT license. You represent you are authorized to make the contributions and grant the license. If your employer has rights to intellectual property that includes your contributions, you represent that you have received permission to make contributions and grant the required license on behalf of that employer.
+

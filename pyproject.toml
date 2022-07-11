@@ -1,0 +1,42 @@
+[tool.poetry]
+name = "data-historian-adapter"
+version = "0.0.1"
+description = "A package for populating D the Deep Lynx dataw warehouse with testing data"
+authors = ["Katherine Wilsdon <katherine.wilsdon@inl.gov>"]
+maintainers = ["Katherine Wilsdon <katherine.wilsdon@inl.gov>"]
+license = ""
+readme = "README.md"
+homepage = ""
+repository = ""
+documentation = ""
+keywords = [
+    "Deep-Lynx",
+    "Testing-Data"
+]
+
+[tool.poetry.dependencies]
+python = ">=3.7.1,<4.0"
+requests = "*"
+python-dotenv = "*"
+deep-lynx = "*"
+pandas = "*"
+numpy = "*"
+Cython = "*"
+Flask = "*"
+environs = "*"
+
+[tool.poetry.dev-dependencies]
+pytest = "*"
+pytest-cov = "*"
+pytest-mock = "*"
+pytest-dotenv = "*"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+run = "wsgi:main"
+
+[tool.poetry.urls]
+issues = ""

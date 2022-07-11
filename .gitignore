@@ -1,0 +1,17 @@
+# Copyright 2022, Battelle Energy Alliance, LLC
+
+*.pyc
+__pycache__
+*.log
+*.json
+.vscode
+.env
+*_run.i
+.coverage
+htmlcov
+test.log
+.DS_Store
+tests/reports/test-results.xml
+*.xml
+*.txt
+*.lock
