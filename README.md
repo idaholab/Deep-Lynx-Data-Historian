@@ -43,11 +43,13 @@ To run this code, first copy the `.env_sample` file and rename it to `.env`. Sev
     * Run `poetry shell` to spawns a shell.
     * Finally, run the project with the command `flask run`
 
-Logs will be written to a logfile, stored in the root directory of the project. The log filename is set in `src/__init__.py` and is called `DataHistorianAdapter.log`. 
+Logs will be written to a log file, stored in the root directory of the project. The log filename is set in `src/__init__.py` and is called `DataHistorianAdapter.log`. 
 
 ## Contributing
 
-This project uses [yapf](https://github.com/google/yapf) for formatting. Please install it and apply formatting before submitting changes (e.g. `yapf --in-place --recursive . --style={column_limit:120}`)
+This project uses [yapf](https://github.com/google/yapf) for formatting. Please install it and apply formatting before submitting changes.
+1. `pip install yapf toml`
+2. `yapf --in-place --recursive . --style={column_limit:120}`)
 
 ## Other Software
 Idaho National Laboratory is a cutting edge research facility which is a constantly producing high quality research and software. Feel free to take a look at our other software and scientific offerings at:
