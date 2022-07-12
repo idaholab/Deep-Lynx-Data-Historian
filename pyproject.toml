@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "data-historian-adapter"
 version = "0.0.1"
-description = "A package for populating D the Deep Lynx dataw warehouse with testing data"
+description = "Deep Lynx Data Historian facilitates the ingestion of data from some data historian into Deep Lynx via manual retrieval or a listening endpoint."
 authors = ["Jeren Browning <jeren.browning@inl.gov>", "Katherine Wilsdon <katherine.wilsdon@inl.gov>"]
 maintainers = ["Jeren Browning <jeren.browning@inl.gov>", "Katherine Wilsdon <katherine.wilsdon@inl.gov>"]
 license = ""
@@ -11,7 +11,8 @@ repository = ""
 documentation = ""
 keywords = [
     "Deep-Lynx",
-    "Testing-Data"
+    "Asset",
+    "Operational-Data"
 ]
 
 [tool.poetry.dependencies]

@@ -2,17 +2,17 @@
 
 Deep Lynx Data Historian Adapter
 
-This software is intended to facilitate the ingestion of data from some data historian into [Deep Lynx](https://github.com/idaholab/Deep-Lynx). This software is intended to facilitate the ingestion of data from some data historian into Deep Lynx. A data historian in this instance is any location where sensor and operational data from some live asset is gathered. The data can be either manual retrieved by this software or the data historian source can push to a listening endpoint provided by this software.
+This software is intended to facilitate the ingestion of data from some data historian into [Deep Lynx](https://github.com/idaholab/Deep-Lynx). A data historian in this instance is any location where sensor and operational data from some live asset is gathered. The data can be either manual retrieved by this software or the data historian source can push to a listening endpoint provided by this software.
 
 ## Data Historian Overview
 
-Two modes form data retrieval:
+Deep Lynx Data Historian facilitates the ingestion of data from some data historian into Deep Lynx via manual retrieval or a listening endpoint. Two modes for data retrieval:
 1. Manual Retrieval
     * Data is manually retrieved by reading a file located on an external file system (i.e. server). Note: Current implementation
 2. Listening Endpoint
-    * The data historian source pushes data to a listening endpoint provided by this software (i.e. `/historian`). Note: Architecture exists, but the responsibility is on the user to implement. See the `file_handler()` function in `__init__.py`
+    * The data historian source pushes data to a listening endpoint provided by this software (i.e. `/historian`). Note: Architecture exists, but the responsibility is on the user to implement. See the `file_handler()` function in `src/__init__.py`
 
-## Data Historian: Manual Revieval
+## Data Historian: Manual Retrieval
 
 Data is manually retrieved by reading a file located on an external file system, such as a server, using a mount point. A mount point is a directory (typically an empty one) in the currently accessible filesystem on which an additional filesystem is mounted (i.e., logically attached). To create this mount point, the `REPOSITORY_MOUNT_DIRECTORY`, `SERVER_DIRECTORY_PATH`, and `SERVER_FILE_PATH` environment variables must be set. See the `Environment Variables` section for more details.
 
@@ -39,7 +39,7 @@ To run this code, first copy the `.env_sample` file and rename it to `.env`. Sev
 ## Getting Started 
 * Complete the [Poetry installation](https://python-poetry.org/) 
 * All following commands are run in the root directory of the project:
-    * Run `poetry install` to install the defined dependencies for the project.
+    * Run `poetry update` to install the defined dependencies for the project.
     * Run `poetry shell` to spawns a shell.
     * Finally, run the project with the command `flask run`
 
