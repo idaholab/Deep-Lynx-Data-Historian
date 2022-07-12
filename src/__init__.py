@@ -74,6 +74,7 @@ def create_app():
         # TODO: Implementation for receiving files
         # Return successful response
         return Response(response=json.dumps({'received': True}), status=200, mimetype='application/json')
+
     return app
 
 

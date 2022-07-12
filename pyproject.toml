@@ -2,8 +2,8 @@
 name = "data-historian-adapter"
 version = "0.0.1"
 description = "A package for populating D the Deep Lynx dataw warehouse with testing data"
-authors = ["Katherine Wilsdon <katherine.wilsdon@inl.gov>"]
-maintainers = ["Katherine Wilsdon <katherine.wilsdon@inl.gov>"]
+authors = ["Jeren Browning <jeren.browning@inl.gov>", "Katherine Wilsdon <katherine.wilsdon@inl.gov>"]
+maintainers = ["Jeren Browning <jeren.browning@inl.gov>", "Katherine Wilsdon <katherine.wilsdon@inl.gov>"]
 license = ""
 readme = "README.md"
 homepage = ""
@@ -24,6 +24,7 @@ numpy = "*"
 Cython = "*"
 Flask = "*"
 environs = "*"
+toml = "*"
 
 [tool.poetry.dev-dependencies]
 pytest = "*"

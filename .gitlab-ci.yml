@@ -9,7 +9,7 @@ linter:
         entrypoint: [""]
     script:
         - echo "Run Linter"
-        - python3 -m pip install yapf
+        - python3 -m pip install yapf toml
         - chmod +x yapf.sh
         - bash yapf.sh
 security:

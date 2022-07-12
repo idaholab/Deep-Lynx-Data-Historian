@@ -11,6 +11,7 @@ import src
 
 
 class Processor:
+
     def __init__(self, api_client):
         self.api_client = src.api_client
 
@@ -32,7 +33,7 @@ class Processor:
             # Determine file type
             split_tup = os.path.splitext(file)
 
-            # Loads .csv or .json file 
+            # Loads .csv or .json file
             json_data = {}
             if split_tup[1] == '.csv':
                 json_data = self.read_csv(file)
@@ -48,11 +49,9 @@ class Processor:
                 result = self.read_json(transformation)
             except Exception:
                 print(
-                    f"ERROR: Supplied file {transformation} is not found. Supply a .json file for the transformation."
-                )
+                    f"ERROR: Supplied file {transformation} is not found. Supply a .json file for the transformation.")
                 logging.error(
-                    f"ERROR: Supplied file {transformation} is not found. Supply a .json file for the transformation."
-                )
+                    f"ERROR: Supplied file {transformation} is not found. Supply a .json file for the transformation.")
 
             # Send processed file to DeepLynx for ingestion
             try:
