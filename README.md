@@ -48,7 +48,7 @@ Logs will be written to a log file, stored in the root directory of the project.
 ## Contributing
 
 This project uses [yapf](https://github.com/google/yapf) for formatting. Please install it and apply formatting before submitting changes.
-1. `pip install yapf toml`
+1. `poetry shell`
 2. `yapf --in-place --recursive . --style={column_limit:120}`)
 
 ## Other Software
