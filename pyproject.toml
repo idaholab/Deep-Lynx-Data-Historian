@@ -1,0 +1,45 @@
+[tool.poetry]
+name = "data-historian-adapter"
+version = "0.0.1"
+description = "Deep Lynx Data Historian facilitates the ingestion of data from some data historian into Deep Lynx via manual retrieval or a listening endpoint."
+authors = ["Jeren Browning <jeren.browning@inl.gov>", "Katherine Wilsdon <katherine.wilsdon@inl.gov>"]
+maintainers = ["Jeren Browning <jeren.browning@inl.gov>", "Katherine Wilsdon <katherine.wilsdon@inl.gov>"]
+license = ""
+readme = "README.md"
+homepage = ""
+repository = ""
+documentation = ""
+keywords = [
+    "Deep-Lynx",
+    "Asset",
+    "Operational-Data"
+]
+
+[tool.poetry.dependencies]
+python = ">=3.7.1,<4.0"
+requests = "*"
+python-dotenv = "*"
+deep-lynx = "*"
+pandas = "*"
+numpy = "*"
+Cython = "*"
+Flask = "*"
+environs = "*"
+
+[tool.poetry.dev-dependencies]
+pytest = "*"
+pytest-cov = "*"
+pytest-mock = "*"
+pytest-dotenv = "*"
+yapf = "*"
+toml = "*"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+run = "wsgi:main"
+
+[tool.poetry.urls]
+issues = ""

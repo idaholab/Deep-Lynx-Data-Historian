@@ -1,0 +1,6 @@
+# Copyright 2022, Battelle Energy Alliance, LLC
+
+# Ignore everything in this directory
+*
+# Except this file
+!.gitignore
