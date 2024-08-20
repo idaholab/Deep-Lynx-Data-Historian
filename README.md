@@ -1,12 +1,12 @@
-# Deep Lynx Data Historian Adapter
+# DeepLynx Data Historian Adapter
 
-Deep Lynx Data Historian Adapter
+DeepLynx Data Historian Adapter
 
-This software is intended to facilitate the ingestion of data from some data historian into [Deep Lynx](https://github.com/idaholab/Deep-Lynx). A data historian in this instance is any location where sensor and operational data from some live asset is gathered. The data can be either manual retrieved by this software or the data historian source can push to a listening endpoint provided by this software.
+This software is intended to facilitate the ingestion of data from some data historian into [DeepLynx](https://github.com/idaholab/Deep-Lynx). A data historian in this instance is any location where sensor and operational data from some live asset is gathered. The data can be either manual retrieved by this software or the data historian source can push to a listening endpoint provided by this software.
 
 ## Data Historian Overview
 
-Deep Lynx Data Historian facilitates the ingestion of data from some data historian into Deep Lynx via manual retrieval or a listening endpoint. Two modes for data retrieval:
+DeepLynx Data Historian facilitates the ingestion of data from some data historian into DeepLynx via manual retrieval or a listening endpoint. Two modes for data retrieval:
 1. Manual Retrieval
     * Data is manually retrieved by reading a file located on an external file system (i.e. server). Note: Current implementation
 2. Listening Endpoint
@@ -16,25 +16,25 @@ Deep Lynx Data Historian facilitates the ingestion of data from some data histor
 
 Data is manually retrieved by reading a file located on an external file system, such as a server, using a mount point. A mount point is a directory (typically an empty one) in the currently accessible filesystem on which an additional filesystem is mounted (i.e., logically attached). To create this mount point, the `REPOSITORY_MOUNT_DIRECTORY`, `SERVER_DIRECTORY_PATH`, and `SERVER_FILE_PATH` environment variables must be set. See the `Environment Variables` section for more details.
 
-There are two ways to ingest data into Deep Lynx:
+There are two ways to ingest data into DeepLynx:
 1. Upload File
-    * A file is attached to the payload (metadata) provided for insertion into Deep Lynx. The `METADATA_FILES` environment variable must be set (leave `FILE_TRANSFORMATIONS` empty). Note: Current implementation
+    * A file is attached to the payload (metadata) provided for insertion into DeepLynx. The `METADATA_FILES` environment variable must be set (leave `FILE_TRANSFORMATIONS` empty). Note: Current implementation
 2. Transformations
-    * The JSON payload is provided that will imported and ingested to the Deep Lynx graph via the typemappings system. Create a script to build your payload in the `transformations/` directory. The `FILE_TRANSFORMATIONS` environment variable must be set (leave `METADATA_FILES` empty). 
+    * The JSON payload is provided that will imported and ingested to the DeepLynx graph via the typemappings system. Create a script to build your payload in the `transformations/` directory. The `FILE_TRANSFORMATIONS` environment variable must be set (leave `METADATA_FILES` empty). 
 
 ## Environment Variables (.env file)
 To run this code, first copy the `.env_sample` file and rename it to `.env`. Several parameters must be present:
-* DEEP_LYNX_URL: The base URL at which calls to Deep Lynx should be sent
-* CONTAINER_NAME: The container name within Deep Lynx
-* DATA_SOURCE_NAME: A name for this data source to be registered with Deep Lynx
+* DEEP_LYNX_URL: The base URL at which calls to DeepLynx should be sent
+* CONTAINER_NAME: The container name within DeepLynx
+* DATA_SOURCE_NAME: A name for this data source to be registered with DeepLynx
 * REPOSITORY_MOUNT_DIRECTORY: A given location (mount point) where a file system is mounted to
 * SERVER_DIRECTORY_PATH: The location of the external file system
 * SERVER_FILE_PATH: The path to a file located on the external file system to read from
 * COLUMNS_KEEP: Column headers within file to keep
-* METADATA_FILES: Paths to .json file(s) containing the payload (metadata) that a file will be attached to in Deep Lynx 
-* FILE_TRANSFORMATIONS: Paths to .json file(s) containing the payload that will imported and ingested to the Deep Lynx graph via the typemappings system
+* METADATA_FILES: Paths to .json file(s) containing the payload (metadata) that a file will be attached to in DeepLynx 
+* FILE_TRANSFORMATIONS: Paths to .json file(s) containing the payload that will imported and ingested to the DeepLynx graph via the typemappings system
 * FILE_SECONDS: Number of seconds to wait between attempts to locate a file. 
-* DELETE_FILE_FLAG: Set to True to delete files after they are successfully processed and ingested to Deep Lynx
+* DELETE_FILE_FLAG: Set to True to delete files after they are successfully processed and ingested to DeepLynx
 
 ## Getting Started 
 * Complete the [Poetry installation](https://python-poetry.org/) 
